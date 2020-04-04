@@ -1,0 +1,95 @@
+.total-list {
+    width: 100%;
+    margin:0px;
+    text-align: center;
+}
+/*body{*/
+/*    background:lightgrey;*/
+/*}*/
+
+
+.input {
+    width:95%;
+    height: 50px;
+    font-size: 20px;
+    margin: 0px;
+    flex-grow: 1;
+    /*border: none;*/
+}
+
+
+.backgroundText {
+    font-size: 70px;
+    color: red;
+    opacity: 0.2;
+
+}
+
+.addUserInputClass {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: white;
+    border-bottom: 1px solid grey;
+    padding: 5px;
+}
+
+.checkClass {
+    width: 10%;
+    height: 40px;
+    border-radius: 50px;
+
+}
+
+.textClass {
+    flex-grow: 1;
+    font-size: 20px;
+    border: none;
+
+}
+
+.closeClass {
+    border: none;
+    height: 50px;
+    font-size: 20px;
+    text-align: center;
+}
+
+.todo-list-page {
+    width:95%;
+}
+
+
+.navBar {
+    height: 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid grey;
+}
+
+.common-border-buttons {
+    font-size: 15px;
+    border-color: white;
+}
+
+.common-border-buttons:hover {
+    border-color: rgba(175, 47, 47, 0.2);
+}
+
+.textClass{
+    width:95%;
+    height: 50px;
+    font-size: 20px;
+    margin: 0px;
+    flex-grow: 1;
+    
+}
+.checkNew{
+    width:95%;
+    height: 50px;
+    font-size: 20px;
+    margin: 0px;
+    flex-grow: 1;
+    text-decoration:line-through;
+}

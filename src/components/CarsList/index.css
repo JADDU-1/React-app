@@ -1,0 +1,75 @@
+/*div {*/
+/*    margin-top: 30px;*/
+/*}*/
+
+.buyCar {
+    font-size:15px;
+    background-color: green;
+    color: white;
+    margin-left: 300px;
+}
+
+/*button {*/
+/*    height: 30px;*/
+/*    border: none;*/
+/*    border-radius: 2px;*/
+/*    background-color: lightgrey;*/
+/*    color: white;*/
+/*    font-size: 15px;*/
+/*}*/
+
+.status {
+    margin-bottom: 20px;
+}
+
+.accelerateOn {
+    height: 30px;
+    border: none;
+    border-radius: 2px;
+    background-color: blue;
+    color: white;
+    font-size: 15px;
+    margin-right: 200px;
+}
+
+.accelerateOff {
+    height: 30px;
+    border: none;
+    border-radius: 2px;
+    background-color: lightgrey;
+    color: white;
+    font-size: 15px;
+    margin-right: 200px;
+}
+
+.deaccelerateOn {
+    height: 30px;
+    border: none;
+    border-radius: 2px;
+    background-color: blue;
+    color: white;
+    font-size: 15px;
+}
+
+.deaccelerateOff {
+    height: 30px;
+    border: none;
+    border-radius: 2px;
+    background-color: lightgrey;
+    color: white;
+    font-size: 15px;
+}
+
+.startOrStopButton {
+    color:white;
+    font-size: 15px;
+    background-color: green;
+
+}
+
+.removeButton {
+    font-size: 15px;
+    background: red;
+    margin-left: 250px;
+    color: white;
+}
