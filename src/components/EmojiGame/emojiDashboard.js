@@ -1,6 +1,7 @@
 import React from "react";
 import {EmojiHeader} from "./emojiHeader.js";
-import {EmojiPage,EmojiListStyles} from'./emojiCss.js';
+import {EmojiFooter} from "./emojiFooter.js";
+import {EmojiPage,EmojiListStyles,GameStatusDispaly,PlayAgain,GameState} from'./emojiCss.js';
 import {EmojiCard} from'./emojiCards.js';
 import "./index.css";
 
@@ -26,19 +27,90 @@ class EmojiDashboard extends React.Component{
     }
     
     createEmojiCards=()=>{
-        const emojiCards=this.state.emojies.map((item,index)=>
-        <EmojiCard key={index} object={item} theme={this.props.themeObject}/>);
-        return emojiCards;
+        const {gameState,emojies,score}=this.state;
+        if(gameState==="PLAYING"){
+          const emojiCards=emojies.map((item,index)=>
+          <EmojiCard key={index} object={item} theme={this.props.themeObject} onclick={this.onEmojiClick}/>);
+          return emojiCards;
+        }
+        else{
+          return(
+              <GameStatusDispaly>
+                 <p>{score}</p>
+                 <GameState text={gameState}>{gameState}</GameState>
+                 <PlayAgain onClick={this.resetGame}>Play Again</PlayAgain>
+              </GameStatusDispaly>
+            );
+        }
+        
+    }
+    
+    onEmojiClick=(emojiCard)=>{
+        const {score}=this.state;
+        if(!emojiCard.isClicked){
+            this.shuffleEmojis();
+            this.incrementScore();
+            emojiCard.isClicked=true;
+        }
+        else {
+            this.setTopScore();
+            this.setState({gameState:"You Lose!"});
+        }
+        
+    }
+    
+    shuffleEmojis=()=>{
+    const {emojies}=this.state;
+    let length=Number(emojies.length-1);
+    for (; length > 0; length--) {
+        const shuffled = Math.floor(Math.random() * (length + 1));
+        const temp = emojies[length];
+        emojies[length] = emojies[shuffled];
+        emojies[shuffled] = temp;
+      }
+      this.setState({emojies:emojies});
+    }
+    
+    incrementScore=()=>{
+        const {score}=this.state;
+        this.setState({score:score+1});
+        if(score===11){
+            this.setState({gameState:"You Won"});
+            this.setTopScore();
+        }
+    }
+    
+    setTopScore=()=>{
+        const {score,topScore}=this.state;
+        if(score>topScore)
+          this.setState({topScore:score});
+    }
+    
+    resetGame=()=>{
+        const {emojies,gameState}=this.state;
+        const emojiCopy=emojies.forEach(item=>{
+            item.isClicked=false;
+        });
+        if(gameState==="You Won")
+        {
+            this.setState({score:0,gameState:"PLAYING",emojies:emojies});
+        }
+        else{
+        //this.shuffleEmojis();
+        this.setState({score:0,gameState:"PLAYING",emjies:emojiCopy});
+        }
     }
     
     render(){
-        //themeObject={this.mode[this.state.changeTheme]}change={this.theme}
+        const {score,topScore}=this.state;
+        const {themeObject,change}=this.props;
         return(
-            <EmojiPage theme={this.props.themeObject}>
-              <EmojiHeader  score={this.state.score} topScore={this.state.topScore} change={this.props.change} theme={this.props.themeObject} />
-              <EmojiListStyles>
+            <EmojiPage theme={themeObject}>
+              <EmojiHeader  score={score} topScore={topScore} change={change} theme={themeObject} />
+              <EmojiListStyles theme={themeObject}>
                 {this.createEmojiCards()}
               </EmojiListStyles>
+              <EmojiFooter/>
             </EmojiPage>
             );
     }

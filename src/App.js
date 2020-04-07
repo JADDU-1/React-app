@@ -19,14 +19,16 @@ class App extends React.Component{
             background: "#fff",
             text:"Light Mode",
             textColor:"black",
-            cardColor:"white"
+            cardColor:"white",
+            emojisBackground:"#e2e8f0;"
         },
     dark: {
             id: "1",
             background: "#2b3945",
             text:"Dark Mode",
             textColor:"white",
-            cardColor:"#2b6cb0"
+            cardColor:"#2b6cb0",
+            emojisBackground:"#1a202c"
         }
   }
   state={

@@ -4,14 +4,14 @@ import {HeaderStyles,ThemeButtonStyles,HeaderName,HeaderUpdateStyles} from'./emo
 
 class EmojiHeader extends React.Component{
     render(){
-        //change={this.props.change} theme={this.props.themeObject}
+        const {score,topScore,theme,change}=this.props;
         return(
             <HeaderStyles>
               <HeaderName>Emoji Game</HeaderName>
               <HeaderUpdateStyles>
-                 <p>Score:{this.props.score}</p>
-                 <p>Top Score:{this.props.topScore}</p>
-                 <ThemeButtonStyles onClick={this.props.change}>{this.props.theme.text}</ThemeButtonStyles>
+                 <p>Score:{score}</p>
+                 <p>Top Score:{topScore}</p>
+                 <ThemeButtonStyles onClick={change} theme={theme} >{theme.text}</ThemeButtonStyles>
               </HeaderUpdateStyles>
             </HeaderStyles>
             );

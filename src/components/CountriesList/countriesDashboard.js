@@ -69,7 +69,7 @@ class CountriesDashboard extends React.Component{
       return mappedData; 
         
     }
-  render(){
+      render(){
       let message='';
       if(this.state.countriesData.length===0)
           message=<Loading>Loading...</Loading>;
