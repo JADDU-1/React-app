@@ -73,10 +73,13 @@ class EmojiDashboard extends React.Component{
     
     incrementScore=()=>{
         const {score}=this.state;
-        this.setState({score:score+1});
         if(score===11){
             this.setState({gameState:"You Won"});
+            this.setState({score:score+1});
             this.setTopScore();
+        }    
+        else{
+            this.setState({score:score+1});
         }
     }
     
@@ -96,7 +99,6 @@ class EmojiDashboard extends React.Component{
             this.setState({score:0,gameState:"PLAYING",emojies:emojies});
         }
         else{
-        //this.shuffleEmojis();
         this.setState({score:0,gameState:"PLAYING",emjies:emojiCopy});
         }
     }

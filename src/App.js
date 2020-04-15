@@ -1,5 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import {observer} from 'mobx-react';
 
 import {Carslist} from "./components/CarsList/index.js";
 import {Todos} from "./components/TodoList/todo.js";
@@ -11,8 +12,18 @@ import "./components/TodoList/index.css";
 import "./components/CountriesList/index.css";
 import {Home} from "./home.js";
 import CountryCard from './components/CountriesList/countryCard.js';
+import CounterPage from './components/CounterPage/index.js';
+import themeStore from './stores/themeStore';
+import {Counter} from "./components/CounterPage/counter.js";
+//import {configure} from 'mobx';
+import {Todo} from "./components/MobxTodo/todoDashboard.js";
 
+@observer
 class App extends React.Component{
+  
+  getCurrentTheme=()=>{
+    return themeStore.selectedTheme;
+  }
   mode={
     light: {
             id: "0",
@@ -31,23 +42,18 @@ class App extends React.Component{
             emojisBackground:"#1a202c"
         }
   }
-  state={
-    changeTheme:"light"
+  
+  setCurrentTheme=(theme)=>{
+    themeStore.setCurrentTheme();
   }
-   theme=(event)=>{
-        if(this.state.changeTheme==="light"){
-            this.setState({changeTheme:"dark"});
-        }
-        else{
-          this.setState({changeTheme:"light"});
-        }
-     
-    }
     render(){
   return (
     <Router basename={process.env.PUBLIC_URL}>
       <div>
         <Switch>
+        <Route path="/counter-page">
+          <CounterPage />
+          </Route>
           <Route path="/car">
           <Carslist />
           </Route>
@@ -58,11 +64,17 @@ class App extends React.Component{
           <AllComponents />
           </Route>
           <Route path="/country">
-          <CountriesDashboard themeObject={this.mode[this.state.changeTheme]}change={this.theme} />
+          <CountriesDashboard themeObject={this.mode[this.getCurrentTheme()]} change={this.setCurrentTheme} />
           </Route>
-          <Router path="/countryCard" children={<CountryCard themeObject={this.mode[this.state.changeTheme]}change={this.theme}/>}/>
+          <Router path="/countryCard" children={<CountryCard themeObject={this.mode[this.getCurrentTheme()]} change={this.setCurrentTheme}/>}/>
           <Route path="/emojigame">
-          <EmojiDashboard themeObject={this.mode[this.state.changeTheme]} change={this.theme}/>
+          <EmojiDashboard themeObject={this.mode[this.getCurrentTheme()]} change={this.setCurrentTheme}/>
+          </Route>
+          <Route path="/counter">
+           <Counter/>
+          </Route>
+          <Route path="/mobxtodos">
+          <Todo />
           </Route>
           <Route path='/'>
           <Home />
@@ -74,23 +86,4 @@ class App extends React.Component{
 }
 }
 export{App}
-
-// const App = () => {
-//   return (
-//     <Router basename={process.env.PUBLIC_URL}>
-//       <Switch>
-//         <Route exact path="/page-1">
-//           <Page1 />
-//         </Route>
-//         <Route path="/">
-//           <HomePage />
-//         </Route>
-//       </Switch>
-//     </Router>
-//   );
-// };
-
-// export default App;
-
-
 

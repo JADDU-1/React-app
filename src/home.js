@@ -24,6 +24,12 @@ class Home extends React.Component{
         <li>
         <Link to="/emojigame">Emoji Game</Link>
         </li>
+        <li>
+        <Link to="/counter">Counter</Link>
+        </li>
+        <li>
+        <Link to="/mobxtodos">MObxTodos</Link>
+        </li>
     </ul>
 </nav>
 </div>
