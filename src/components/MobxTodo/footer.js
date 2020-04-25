@@ -1,15 +1,16 @@
 import React from 'react';
-import {FooterStyles} from'./css.js';
+import {FooterStyles,FooterButton} from'./css.js';
 
 class Footer extends React.Component{
     render(){
-        const {value,allItems,active,completed,allClear}=this.props;
+        const {todosCount,allItems,active,completed,allClear}=this.props;
         return(
           <FooterStyles>
-          <button  onClick={allItems}>All</button>
-          <button  onClick={active}>Active</button>
-          <button  onClick={completed}>Completed</button>
-          <button  onClick={allClear}>Clear completed</button>
+            <span>{todosCount} items left</span>
+          <FooterButton  onClick={allItems}>All</FooterButton>
+          <FooterButton  onClick={active}>Active</FooterButton>
+          <FooterButton  onClick={completed}>Completed</FooterButton>
+          <FooterButton  onClick={allClear}>Clear completed</FooterButton>
         </FooterStyles>
             );
     }

@@ -17,6 +17,8 @@ import themeStore from './stores/themeStore';
 import {Counter} from "./components/CounterPage/counter.js";
 //import {configure} from 'mobx';
 import {Todo} from "./components/MobxTodo/todoDashboard.js";
+import EventApp from './components/EventPage/EventApp/index';
+import GridMemoryGame from './components/GridGameApp/gridMemoryGame';
 
 @observer
 class App extends React.Component{
@@ -31,7 +33,8 @@ class App extends React.Component{
             text:"Light Mode",
             textColor:"black",
             cardColor:"white",
-            emojisBackground:"#e2e8f0;"
+            emojisBackground:"#e2e8f0;",
+            gridGameBackground:"#fff"
         },
     dark: {
             id: "1",
@@ -39,7 +42,8 @@ class App extends React.Component{
             text:"Dark Mode",
             textColor:"white",
             cardColor:"#2b6cb0",
-            emojisBackground:"#1a202c"
+            emojisBackground:"#1a202c",
+            gridGameBackground:"#1a202c"
         }
   }
   
@@ -68,13 +72,19 @@ class App extends React.Component{
           </Route>
           <Router path="/countryCard" children={<CountryCard themeObject={this.mode[this.getCurrentTheme()]} change={this.setCurrentTheme}/>}/>
           <Route path="/emojigame">
-          <EmojiDashboard themeObject={this.mode[this.getCurrentTheme()]} change={this.setCurrentTheme}/>
+          <EmojiDashboard themeObject={this.mode[this.getCurrentTheme()]}  change={this.setCurrentTheme}/>
           </Route>
           <Route path="/counter">
            <Counter/>
           </Route>
           <Route path="/mobxtodos">
           <Todo />
+          </Route>
+          <Route path='/events-app'>
+          <EventApp />
+          </Route>
+          <Route path="/gridGame">
+            <GridMemoryGame themeObject={this.mode[this.getCurrentTheme()]} changeTheme={this.setCurrentTheme}/>
           </Route>
           <Route path='/'>
           <Home />

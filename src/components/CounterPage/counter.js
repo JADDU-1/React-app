@@ -1,12 +1,12 @@
 import React from "react";
 import { observer} from 'mobx-react';
-import {observable,action} from 'mobx';
+import {observable,action,computed} from 'mobx';
 import {Buttons,CounterPage,Input,TotalPage} from'./styles.js';
 
 @observer
 class Counter extends React.Component{
  onchange=(event)=>{
-  counterStore.onChangeCount(event.target.value)
+  counterStore.onChangeCount(event.target.value) 
  }
     render(){
      return(
@@ -40,8 +40,11 @@ class CounterStore extends React.Component{
     this.count=Number(userCount);
  }
  
-}
+ }
+ 
 const counterStore=new CounterStore();
 export default counterStore;
+
+
 
 

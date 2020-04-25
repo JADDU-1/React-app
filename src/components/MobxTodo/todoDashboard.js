@@ -2,8 +2,10 @@ import React from "react";
 import {Todoinput} from "./userInput.js";
 import {Footer} from "./footer.js";
 import { observer} from 'mobx-react';
-import {observable,action} from 'mobx';
-import {TodoPage,TitleText} from'./css.js';
+import {observable,action,computed} from 'mobx';
+import {TodoPage,TitleText,UserInput} from'./css.js';
+//import './index.css';
+
 
 
 @observer
@@ -32,12 +34,14 @@ class Todo extends React.Component {
       return maps;
     }
     else if(this.selectedFilter==="Active"){
-      const maps = this.todos.map((item)=>
+      const filter=this.todos.filter(item=>item.status===false)
+      const maps = filter.map((item)=>
       <Todoinput key={item.id} object={item} checks={this.onCompleteTodo} remove={this.remove} />);
       return maps;
     }
     else if(this.selectedFilter==="Completed"){
-      const maps = this.todos.map((item)=>
+      const filter=this.todos.filter(item=>item.status===true)
+      const maps =filter.map((item)=>
         <Todoinput key={item.id} object={item} checks={this.onCompleteTodo} remove={this.remove} />);
       return maps;
     }
@@ -62,22 +66,18 @@ class Todo extends React.Component {
   
   @action.bound
   allItem(){
-    //const display=this.todos.filter((item)=>item);
-    //this.todos=display;
     this.selectedFilter="All";
     this.addTodo();
   }
   
   @action.bound
   active(){
-    //const display=this.todos.filter((item)=>(!item.status));
     this.selectedFilter="Active";
     this.addTodo();
   }
   
   @action.bound
   completed(){
-    //const display=this.todos.filter((item)=>(item.status));
     this.selectedFilter="Completed";
     this.addTodo();
   }
@@ -87,18 +87,21 @@ class Todo extends React.Component {
     const display=this.todos.filter((item,index)=>(!item.status));
     this.todos=display;
   }
+  @computed get counter() {
+    let count=0;
+    this.todos.forEach((item,index)=>{if(item.status===false){count++}});
+    return count;
+  }
   
   render(){
+    const todos=this.addTodo()
+    const count=this.counter
   return (
     <TodoPage>
       <TitleText>todos</TitleText>
-      <div>
-        <div>
-            <input onKeyDown={this.onAddTodo}  type="text" placeholder="Type something" />
-        </div>
-        {this.addTodo()}
-        <Footer value={this.count} allItems={this.allItem} active={this.active} completed={this.completed} allClear={this.allClear}/>
-      </div>
+      <UserInput onKeyDown={this.onAddTodo}  type="text" placeholder="Type something"></UserInput>
+      {todos}
+      <Footer todosCount={count} allItems={this.allItem} active={this.active} completed={this.completed} allClear={this.allClear}/>
     </TodoPage>
   );
 }

@@ -46,15 +46,16 @@ class EmojiDashboard extends React.Component{
     }
     
     onEmojiClick=(emojiCard)=>{
-        const {score}=this.state;
+       // const {score}=this.state;
         if(!emojiCard.isClicked){
             this.shuffleEmojis();
             this.incrementScore();
             emojiCard.isClicked=true;
         }
+        
         else {
-            this.setTopScore();
             this.setState({gameState:"You Lose!"});
+            this.setTopScore();
         }
         
     }
@@ -73,20 +74,22 @@ class EmojiDashboard extends React.Component{
     
     incrementScore=()=>{
         const {score}=this.state;
-        if(score===11){
-            this.setState({gameState:"You Won"});
-            this.setState({score:score+1});
-            this.setTopScore();
-        }    
-        else{
-            this.setState({score:score+1});
-        }
+        this.setState({score:score+1});
+        if(score===11)
+        this.setTopScore();
+        
     }
     
     setTopScore=()=>{
-        const {score,topScore}=this.state;
+        const {score,topScore}=this.state; 
+        
         if(score>topScore)
-          this.setState({topScore:score});
+        //   this.setState(prev=>{topScore:score});
+        this.setState((prevState) => {
+            return { topScore:prevState.score}
+          })
+        if(score===11)
+            this.setState({gameState:"You Won"});
     }
     
     resetGame=()=>{

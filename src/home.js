@@ -28,7 +28,13 @@ class Home extends React.Component{
         <Link to="/counter">Counter</Link>
         </li>
         <li>
-        <Link to="/mobxtodos">MObxTodos</Link>
+        <Link to="/mobxtodos">MObx Todos</Link>
+        </li>
+        <li>
+        <Link to="/events-app">Event Page</Link>
+        </li>
+        <li>
+        <Link to="/gridGame">Grid Memory Game</Link>
         </li>
     </ul>
 </nav>
