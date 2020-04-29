@@ -1,6 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import {observer} from 'mobx-react';
+import {observer,Provider} from 'mobx-react';
 
 import {Carslist} from "./components/CarsList/index.js";
 import {Todos} from "./components/TodoList/todo.js";
@@ -12,14 +12,18 @@ import "./components/TodoList/index.css";
 import "./components/CountriesList/index.css";
 import {Home} from "./home.js";
 import CountryCard from './components/CountriesList/countryCard.js';
-import CounterPage from './components/CounterPage/index.js';
+import CounterPage from './components/CounterPage/counter.js';
 import themeStore from './stores/themeStore';
 import {Counter} from "./components/CounterPage/counter.js";
 //import {configure} from 'mobx';
 import {Todo} from "./components/MobxTodo/todoDashboard.js";
 import EventApp from './components/EventPage/EventApp/index';
 import GridMemoryGame from './components/GridGameApp/gridMemoryGame';
-
+import TodoAppAPI from './components/MobxTodoAppAPI/todoApp';
+import stores from './stores/index';
+// import SignInPage from './Authentication/routes';
+import AuthenticationRoutes from './Authentication/routes/index'
+import ProductRoutes from './Products/routes/index'
 @observer
 class App extends React.Component{
   
@@ -52,6 +56,7 @@ class App extends React.Component{
   }
     render(){
   return (
+    <Provider {...stores}>
     <Router basename={process.env.PUBLIC_URL}>
       <div>
         <Switch>
@@ -86,12 +91,18 @@ class App extends React.Component{
           <Route path="/gridGame">
             <GridMemoryGame themeObject={this.mode[this.getCurrentTheme()]} changeTheme={this.setCurrentTheme}/>
           </Route>
+          <Route path='/mobxTodoApi'>
+          <TodoAppAPI />
+          </Route>
+          {AuthenticationRoutes}
+          {ProductRoutes}
           <Route path='/'>
           <Home />
           </Route>
         </Switch>
       </div>
     </Router>
+    </Provider>
   );
 }
 }

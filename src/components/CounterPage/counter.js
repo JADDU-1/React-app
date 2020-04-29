@@ -1,6 +1,6 @@
 import React from "react";
 import { observer} from 'mobx-react';
-import {observable,action,computed} from 'mobx';
+import {observable,action} from 'mobx';
 import {Buttons,CounterPage,Input,TotalPage} from'./styles.js';
 
 @observer

@@ -1,10 +1,15 @@
 import React from "react";
 import {
-  Link
+  Link,Redirect
 } from "react-router-dom";
+import {ACCESS_TOKEN,getCookie} from './utils/StorageUtils'
 
 class Home extends React.Component{
+    goToLoinPage=()=><Redirect to={{pathname:'/signin'}}/>
+    goToProductPage=()=><Redirect to={{pathname:'/productpage'}}/>
     render(){
+        const{goToLoinPage,goToProductPage}=this;
+      return  (getCookie(ACCESS_TOKEN===undefined)?goToLoinPage():goToProductPage());
     return(
         <div>
 <nav>
@@ -35,6 +40,12 @@ class Home extends React.Component{
         </li>
         <li>
         <Link to="/gridGame">Grid Memory Game</Link>
+        </li>
+        <li>
+        <Link to="/mobxTodoApi">Mobx TodoApp API</Link>
+        </li>
+        <li>
+        <Link to="/signin">E-Commerse</Link>
         </li>
     </ul>
 </nav>
