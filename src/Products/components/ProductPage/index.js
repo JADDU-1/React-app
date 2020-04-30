@@ -3,8 +3,8 @@ import { observer, inject } from 'mobx-react'
 import LoadingWrapperWithFailure from '../../../components/common/LoadingWrapperWithFailure'
 import {action} from 'mobx'
 import ProductList from '../ProductList'
-import {TotalPage,SignOut} from './styles'
-import CartItem from '../CartItem'
+import {TotalPage,SignOut,PageHeader} from './styles'
+import CartList from '../CartList'
 @inject('productStore','authStores')
 @observer
 class ProductPage extends Component {
@@ -31,13 +31,15 @@ class ProductPage extends Component {
             const { getProductListAPIStatus, getProductListAPIError } = this.props.productStore
         return (
             <TotalPage>
+              <PageHeader>
                 <SignOut onClick={this.onClickSignOut}>Sign out</SignOut>
+                <CartList />
+                </PageHeader>
                 <LoadingWrapperWithFailure 
                   apiStatus = {getProductListAPIStatus}
                   apiError = {getProductListAPIError}
                   onRetryClick = {this.doNetworkCalls} 
                   renderSuccessUI = {this.renderProducts} />
-                <CartItem />
             </TotalPage>
         );
     }

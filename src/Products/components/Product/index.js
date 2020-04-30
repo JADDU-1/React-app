@@ -2,13 +2,13 @@ import React from 'react'
 import { observer,inject } from 'mobx-react'
 import {EachProduct,Image,AddButton} from './styles.js'
 
-inject('cartStore')
+@inject('cartStore')
 @observer 
 class Product extends React.Component {
 
   onClickAddToCart = () => {
-    const {cartStore,eachProduct}=this.props
-    cartStore.onClickAddToCart.onClickAddToCart(eachProduct.productId)
+    const {eachProduct}=this.props
+    this.props.cartStore.onClickAddToCart(eachProduct.productId)
   }
 
   render() {

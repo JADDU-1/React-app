@@ -3,7 +3,6 @@ import { observable, action, computed} from 'mobx'
 import CartItem from "../Models/CartItem"
 
 class CartStore {
-    
   @observable cartProductList
   @observable productStore
   
@@ -24,7 +23,7 @@ class CartStore {
 
   @action.bound
   onRemoveCartItem(id){
-    let filteredItems = this.cartProductList.filter(item => item.id !== id)
+    let filteredItems = this.cartProductList.filter(item => item.cartId !== id)
     this.cartProductList = filteredItems
   }
 
