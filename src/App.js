@@ -24,6 +24,8 @@ import stores from './stores/index';
 // import SignInPage from './Authentication/routes';
 import AuthenticationRoutes from './Authentication/routes/index'
 import ProductRoutes from './Products/routes/index'
+// import ProtectorRoute from './components/ProtectorRoute/index'
+//import ProtectRoute from "./components/ProtectorRoute/index.js";
 @observer
 class App extends React.Component{
   
@@ -108,3 +110,5 @@ class App extends React.Component{
 }
 export{App}
 
+// {AuthenticationRoutes}
+          // {ProductRoutes}

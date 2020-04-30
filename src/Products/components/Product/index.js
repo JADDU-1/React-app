@@ -6,9 +6,9 @@ import {EachProduct,Image,AddButton} from './styles.js'
 @observer 
 class Product extends React.Component {
 
-  onClickAddToCart = () => {
-    const {eachProduct}=this.props
-    this.props.cartStore.onClickAddToCart(eachProduct.productId)
+  onClickAddToCart = (event) => {
+    //const {eachProduct}=this.props
+    this.props.cartStore.onClickAddToCart(event.target.id)
   }
 
   render() {
@@ -20,7 +20,7 @@ class Product extends React.Component {
             <p>{eachProduct.title}</p>
             <p>{eachProduct.currencyFormat}{eachProduct.price}</p>
             <p>or {eachProduct.installmentsCount}x{eachProduct.currencyFormat}{installment}</p>
-            <AddButton onClick={this.onClickAddToCart}>Add to cart</AddButton>
+            <AddButton id={eachProduct.productId} onClick={this.onClickAddToCart}>Add to cart</AddButton>
         </EachProduct>
     );
   }

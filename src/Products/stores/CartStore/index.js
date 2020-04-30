@@ -4,11 +4,11 @@ import CartItem from "../Models/CartItem"
 
 class CartStore {
   @observable cartProductList
-  @observable productStore
+  productStore
   
   constructor(productStore) {
     this.cartProductList = []
-    this.productStore=productStore.productList
+    this.productStore=productStore//.productList
   }
   @action.bound
   onClickAddToCart(productId) {
@@ -35,8 +35,8 @@ class CartStore {
 
   @action.bound
   getProductDetailsById(id){
-     const product= this.productStore.filter(item=>item.productId===id)
-     return product
+     const product= this.productStore.productList.filter(item=>item.productId===Number(id))
+     return product[0]
   }
 
   @computed get totalCartAmount(){

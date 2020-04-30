@@ -2,17 +2,19 @@ import React from "react";
 import {
   Link,Redirect
 } from "react-router-dom";
-import {ACCESS_TOKEN,getCookie} from './utils/StorageUtils'
+import {ACCESS_TOKEN,getCookie, getAccessToken} from './utils/StorageUtils'
 
 class Home extends React.Component{
-    goToLoinPage=()=><Redirect to={{pathname:'/signin'}}/>
-    goToProductPage=()=><Redirect to={{pathname:'/productpage'}}/>
-    render(){
-        const{goToLoinPage,goToProductPage}=this;
-      return  (getCookie(ACCESS_TOKEN===undefined)?goToLoinPage():goToProductPage());
+    // goToLoginPage=()=><Redirect to={{pathname:'/signin'}}/>
+    // goToProductPage=()=><Redirect to={{pathname:'/productpage'}}/>
+    // render(){
+    //     const{goToLoginPage,goToProductPage}=this;
+    //   return  (getCookie(ACCESS_TOKEN===undefined)?goToLoginPage():goToProductPage());
+   render(){
+     //if(getAccessToken())  return goToProductPage();
     return(
-        <div>
-<nav>
+    <div>
+    <nav>
     <ul>
         <li>
         <Link to="/car">Cars App</Link>
@@ -45,7 +47,7 @@ class Home extends React.Component{
         <Link to="/mobxTodoApi">Mobx TodoApp API</Link>
         </li>
         <li>
-        <Link to="/signin">E-Commerse</Link>
+        <Link to="/productpage">E-Commerse</Link>
         </li>
     </ul>
 </nav>

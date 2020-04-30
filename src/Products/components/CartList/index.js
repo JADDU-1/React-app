@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { observer,inject } from "mobx-react";
 import { FiShoppingCart } from 'react-icons/fi';
-import {CartContainer,CartImage,CartPage,CloseButton,InnerCartImage,CartHeading,SelectedProducts} from "./styles"
+import {CartContainer,CartImage,CartPage,CloseButton,InnerCartImage,CartHeading,SelectedProducts,Products} from "./styles"
 import CartItem from '../CartItem'
 import { observable } from "mobx";
 
@@ -19,15 +19,17 @@ class CartList extends Component {
         return (
         <CartContainer display={this.display} >
             <CartImage display={this.display} onClick={this.onClickCart}>{<FiShoppingCart/>}</CartImage>
+                <CloseButton display={this.display} onClick={this.onClickCart}>X</CloseButton>
             <CartPage display={this.display}>
-                <CloseButton onClick={this.onClickCart}>X</CloseButton>
                 <SelectedProducts>
                     <InnerCartImage>{<FiShoppingCart/>}</InnerCartImage>
                     <CartHeading>Cart</CartHeading>
                 </SelectedProducts>
+                <Products>
                 {cartProductList.map(product=>
                     <CartItem cartItem={product} getProductDetailsById={getProductDetailsById} onRemoveCartItem={onRemoveCartItem}/>
                 )}
+                </Products>
             </CartPage>
         </CartContainer>
         );

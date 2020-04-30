@@ -4,9 +4,10 @@ import {
   PRODUCT_PATH
 } from "../constants/RouteConstants";
 import ProductPage from "../components/ProductPage";
+import ProtectedRoute from "../../components/ProtectorRoute"
 
 const ProductRoutes = [
-  <Route key={PRODUCT_PATH} path={PRODUCT_PATH} component={ProductPage} />
+  <ProtectedRoute key={PRODUCT_PATH} path={PRODUCT_PATH} component={ProductPage} />
 ];
 
 export default ProductRoutes;

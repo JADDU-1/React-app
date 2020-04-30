@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import {CartContainer,CloseButton,Products,Image,Details,Cost} from "./styles";
+import { observer } from "mobx-react";
 //import CartItem from "../../stores/Models/CartItem";
 
 
 
-class CartItem extends Component {
+
+@observer class CartItem extends Component {
 
     onRemoveCartItem=(event)=>{
         this.props.onRemoveCartItem(event.target.id)
@@ -12,7 +14,7 @@ class CartItem extends Component {
    
     render() {
         const {getProductDetailsById,cartItem}=this.props
-        const productDetails=getProductDetailsById(cartItem.productId)
+        let productDetails=getProductDetailsById(cartItem.productId)
         return (
         <CartContainer status={this.status}>
             <Image src={productDetails.imageURL}></Image>
