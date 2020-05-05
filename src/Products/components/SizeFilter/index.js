@@ -1,23 +1,19 @@
 import React, { Component } from 'react';
 import {Sizes,SizeButton,SizeHeading,SizeContainer} from './styles.js'
+import EachSize from "../EachSize/index.js";
 class SizeFilter extends Component {
 
-    onSelectSize=(event)=>{
-        this.props.onSelectSize(event.target.value)
-    }
+
     render() {
+        const {onSelectSize,sizeFilter}=this.props
         return (
             <SizeContainer>
                 <SizeHeading>Sizes:</SizeHeading>
                 <Sizes>
-                <SizeHeading></SizeHeading>
-                <SizeButton onClick={this.onSelectSize} value="XS">XS</SizeButton>
-                <SizeButton onClick={this.onSelectSize} value="S">S</SizeButton>
-                <SizeButton onClick={this.onSelectSize} value="M">M</SizeButton>
-                <SizeButton onClick={this.onSelectSize} value="L">L</SizeButton>
-                <SizeButton onClick={this.onSelectSize} value="XL">XL</SizeButton>
-                <SizeButton onClick={this.onSelectSize} value="XXL">XXL</SizeButton>
-            </Sizes>
+                    {sizeFilter.map(size=>
+                        <EachSize key={"size"} size={size} onSelectSize={onSelectSize} />
+                    )}
+                </Sizes>
             </SizeContainer>
         );
     }

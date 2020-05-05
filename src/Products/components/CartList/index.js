@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
 import { observer,inject } from "mobx-react";
 import { FiShoppingCart } from 'react-icons/fi';
-import {CartContainer,CartImage,CartPage,CloseButton,InnerCartImage,CartHeading,SelectedProducts,Products} from "./styles"
+import {CartContainer,CartImage,CartPage,CloseButton,InnerCartImage,CartHeading,SelectedProducts,
+    Products,CheckOutTag,Count} from "./styles"
 import CartItem from '../CartItem'
 import { observable } from "mobx";
+import Checkout from "../CheckOut";
+import SubTotal from "../SubTotal";
 
 @inject('cartStore')
 @observer
@@ -15,11 +18,13 @@ class CartList extends Component {
     }
     
     render() {
-        const {getProductDetailsById,onRemoveCartItem,cartProductList}=this.props.cartStore
+        const {getProductDetailsById,noOfProductsInCart,onRemoveCartItem,cartProductList,totalCartAmount,clearCart}=this.props.cartStore
+        let totalAmount=totalCartAmount
         return (
         <CartContainer display={this.display} >
             <CartImage display={this.display} onClick={this.onClickCart}>{<FiShoppingCart/>}</CartImage>
-                <CloseButton display={this.display} onClick={this.onClickCart}>X</CloseButton>
+            <Count display={this.display}>{noOfProductsInCart}</Count>
+            <CloseButton display={this.display} onClick={this.onClickCart}>X</CloseButton>
             <CartPage display={this.display}>
                 <SelectedProducts>
                     <InnerCartImage>{<FiShoppingCart/>}</InnerCartImage>
@@ -30,6 +35,10 @@ class CartList extends Component {
                     <CartItem cartItem={product} getProductDetailsById={getProductDetailsById} onRemoveCartItem={onRemoveCartItem}/>
                 )}
                 </Products>
+                <CheckOutTag>
+                    <SubTotal total={totalCartAmount}/>
+                    <Checkout total={totalAmount} clearCart={clearCart} />
+                </CheckOutTag>
             </CartPage>
         </CartContainer>
         );

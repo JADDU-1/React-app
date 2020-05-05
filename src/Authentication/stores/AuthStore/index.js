@@ -20,11 +20,17 @@ class AuthStore {
     }
 
     @action.bound
-  userSignIn() {
+  userSignIn(data,onSuccess,onFailure) {
     const AuthPromise = this.authAPIService.signInAPI()
     return bindPromiseWithOnSuccess(AuthPromise)
-    .to(this.setGetUserSignInAPIStatus,this.setUserSignInAPIResponse)
-    .catch(this.setGetUserSignInAPIError)
+    .to(this.setGetUserSignInAPIStatus,(response) => {
+      this.setUserSignInAPIResponse(response);
+      onSuccess();
+    })
+    .catch((error) => {
+      this.setGetUserSignInAPIError(error);
+      onFailure();
+    })
   }
 
   @action.bound
@@ -45,6 +51,7 @@ class AuthStore {
   @action.bound
     signOut(){
     clearUserSession()
+    this.init()
   }
 }
 

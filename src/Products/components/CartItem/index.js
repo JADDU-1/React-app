@@ -19,9 +19,9 @@ import { observer } from "mobx-react";
         <CartContainer status={this.status}>
             <Image src={productDetails.imageURL}></Image>
             <Details>
-                <p></p>
+                <p>{productDetails.printStyle}</p>
                 <p>{productDetails.title}</p>
-                <p>Quantity{productDetails.quantity}</p>
+                <p>Quantity{cartItem.quantity}</p>
             </Details>
             <Products>
                 <CloseButton id={cartItem.cartId} onClick={this.onRemoveCartItem}>X</CloseButton>

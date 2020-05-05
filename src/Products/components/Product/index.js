@@ -1,6 +1,7 @@
 import React from 'react'
 import { observer,inject } from 'mobx-react'
-import {EachProduct,Image,AddButton} from './styles.js'
+import {EachProduct,Image,AddButton,FreeShipping} from './styles.js'
+// import Tostify from '../../Tostify'
 
 @inject('cartStore')
 @observer 
@@ -27,3 +28,7 @@ class Product extends React.Component {
 }
 
 export default Product;
+
+{/* <FreeShipping isFreeShipping={eachProduct.isFreeShipping}>
+              {eachProduct.isFreeShipping ? 'Free shipping' : ''}
+            </FreeShipping> */}

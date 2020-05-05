@@ -2,6 +2,7 @@ import React from "react";
 import {
   Link,Redirect
 } from "react-router-dom";
+import {PRODUCT_PATH} from './Products/constants/RouteConstants';
 import {ACCESS_TOKEN,getCookie, getAccessToken} from './utils/StorageUtils'
 
 class Home extends React.Component{
@@ -47,7 +48,7 @@ class Home extends React.Component{
         <Link to="/mobxTodoApi">Mobx TodoApp API</Link>
         </li>
         <li>
-        <Link to="/productpage">E-Commerse</Link>
+        <Link to={PRODUCT_PATH}>E-Commerse</Link>
         </li>
     </ul>
 </nav>
