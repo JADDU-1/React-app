@@ -86,7 +86,6 @@ class ProductStore {
       if(this.sizeFilter.filter(size=>item.availableSizes.includes(size)).length){
         return item
     }})
-  
   }
   if(this.sortBy==="ASCENDING")
      display =display.sort((a,b)=> (a.price-b.price));

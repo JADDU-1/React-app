@@ -17,7 +17,7 @@ class CartItem extends React.Component {
 
     @action.bound
     incrementQuantity() {
-        this.isCompleted = this.quantity+=1
+        this.quantity = this.quantity+=1
     }
  
 }

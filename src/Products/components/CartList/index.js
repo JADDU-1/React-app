@@ -31,9 +31,9 @@ class CartList extends Component {
                     <CartHeading>Cart</CartHeading>
                 </SelectedProducts>
                 <Products>
-                {cartProductList.map(product=>
-                    <CartItem cartItem={product} getProductDetailsById={getProductDetailsById} onRemoveCartItem={onRemoveCartItem}/>
-                )}
+                    {cartProductList.map(product=>
+                        <CartItem cartItem={product} getProductDetailsById={getProductDetailsById} onRemoveCartItem={onRemoveCartItem}/>
+                    )}
                 </Products>
                 <CheckOutTag>
                     <SubTotal total={totalCartAmount}/>

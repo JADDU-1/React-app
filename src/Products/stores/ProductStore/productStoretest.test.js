@@ -4,18 +4,10 @@ import {
     API_FETCHING,
     API_INITIAL
   } from "@ib/api-constants";
-  import Cookie from 'js-cookie'
   import ProductService from "../../services/ProductService";
   import getUserProductResponse from "../../fixtures/getProductResponse/index.json";
   import ProductStore from "./index";
-//import { extendObservableObjectWithProperties } from "mobx/lib/internal";
 
-  let mockSetCookie=jest.fn();
-  let mockRemoveCookie=jest.fn();
-
-  Cookie.set=mockSetCookie;
-  Cookie.remove=mockRemoveCookie
-  
   describe("ProductStore Tests", () => {
     let productAPI
     let productStore
@@ -54,7 +46,6 @@ import {
   
       await productStore.getProductList();
       expect(productStore.getProductListAPIStatus).toBe(API_SUCCESS);
-      //expect(mockSetCookie).toBeCalled();
       //expect(onSuccess).toBeCalled();
     });
 
@@ -68,7 +59,7 @@ import {
       mockProductAPI.mockReturnValue(mockFailurePromise);
       productAPI.getProductsAPI = mockProductAPI;
   
-      productStore = new ProductStore(productAPI);
+      //productStore = new ProductStore(productAPI);
       await productStore.getProductList();
   
       expect(productStore.getProductListAPIStatus).toBe(API_FAILED);
@@ -76,10 +67,26 @@ import {
       //expect(onFailure).toBeCalled();
     });
 
-    it("should test prices order",() => {
+    it("should test sorted prices order",() => {
       let price="Lowest to highest"
+      productStore.productList=[{price:1},{price:3},{price:2}]
       productStore.onChangeSortBy(price)
-      let sorted="ASCENDING";
-      expect(productStore.sortBy).toBe(sorted);
+      expect(productStore.sortedAndFilteredProducts).toStrictEqual([{price:1},{price:2},{price:3}]); 
+      
+      price="Highest to lowest"
+      productStore.onChangeSortBy(price)
+      expect(productStore.sortedAndFilteredProducts).toStrictEqual([{price:3},{price:2},{price:1}]);
+     
+    })
+
+    it("should test sorted sizes",() => {
+      productStore.sizeFilter=["M"]
+      productStore.onSelectSize("L")
+      productStore.productList=[{price:1,availableSizes:["XL"]},{price:3,availableSizes:["M","L"]},{price:2,availableSizes:["L"]}]
+      expect(productStore.sortedAndFilteredProducts[0].availableSizes).toEqual(["M","L"]);
+
+      productStore.sizeFilter=["M","L"]
+      productStore.onSelectSize("L")
+      expect(productStore.sizeFilter).toEqual(["M"]);
     })
   })

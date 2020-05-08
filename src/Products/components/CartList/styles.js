@@ -18,11 +18,11 @@ display:${props=>props.display===false?'none':'flex'}`;
 const InnerCartImage=styled.span`${tw`text-5xl  text-white `}`;
 const CartHeading=styled.span`${tw` ml-4 `}`;
 
-const Products=styled.div`${tw` flex flex-col `}`;
+const Products=styled.div`${tw` flex flex-col justify-start overflow-y-auto`}`;
 
 const SelectedProducts=styled.div`${tw`flex text-xl  justify-center m-2 `}`;
 
-const CheckOutTag=styled.div`${tw`flex flex-col justify-center w-auto m-4 border-t border-gray-600 h-32`}`;
+const CheckOutTag=styled.div`${tw`flex flex-col justify-center w-auto m-4 border-t border-gray-600 h-32 `}`;
 
 //const Count=styled.div`${tw` text-xs text-yellow-500 flex justify-center items-center -mt-10 `}`;
 const Count=styled.div`${tw` fixed top-3 right-2 text-yellow-500 z-20 mx-8 my-4 `}
