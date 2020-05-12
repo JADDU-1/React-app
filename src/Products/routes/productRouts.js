@@ -6,7 +6,7 @@ import ProductList from '../components/ProductList'
 import ProductPage from "../components/ProductPage";
 
 
-@inject('productStore','authStores')
+@inject('productStore','authStores','cartStore')
 @observer
 class ProductRouts extends Component {
     componentDidMount() {
@@ -15,6 +15,7 @@ class ProductRouts extends Component {
        }
  
        doNetworkCalls = () => {
+        this.props.productStore.init()
          this.props.productStore.getProductList()
        }
          @action.bound
@@ -38,6 +39,7 @@ class ProductRouts extends Component {
            onClickSignOut={this.onClickSignOut}
            getProductListAPIStatus={getProductListAPIStatus}
            getProductListAPIError={getProductListAPIError}
+           cartStore={this.props.cartStore}
            />
         );
     }

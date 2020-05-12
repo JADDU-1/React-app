@@ -21,19 +21,19 @@ class Product extends React.Component {
     let installment=parseFloat((eachProduct.price)/eachProduct.installmentsCount).toFixed(2)
     return (
         <EachProduct>
+            <FreeShipping isFreeShipping={eachProduct.isFreeShipping}>
+                          {eachProduct.isFreeShipping ? 'Free shipping' : ''}
+                        </FreeShipping>
+            <ToastContainer />
             <Image src={eachProduct.imageURL}></Image>
             <p>{eachProduct.title}</p>
             <p>{eachProduct.currencyFormat}{eachProduct.price}</p>
             <p>or {eachProduct.installmentsCount}x{eachProduct.currencyFormat}{installment}</p>
             <AddButton id={eachProduct.productId} onClick={this.onClickAddToCart}>Add to cart</AddButton>
-            <ToastContainer />
         </EachProduct>
     );
   }
 }
 
 export default Product;
-
-{/* <FreeShipping isFreeShipping={eachProduct.isFreeShipping}>
-              {eachProduct.isFreeShipping ? 'Free shipping' : ''}
-            </FreeShipping> */}
+ 

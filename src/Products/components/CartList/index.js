@@ -8,7 +8,7 @@ import { observable } from "mobx";
 import Checkout from "../CheckOut";
 import SubTotal from "../SubTotal";
 
-@inject('cartStore')
+
 @observer
 class CartList extends Component {
     @observable display=false
@@ -21,11 +21,11 @@ class CartList extends Component {
         const {getProductDetailsById,noOfProductsInCart,onRemoveCartItem,cartProductList,totalCartAmount,clearCart}=this.props.cartStore
         let totalAmount=totalCartAmount
         return (
-        <CartContainer display={this.display} >
-            <CartImage display={this.display} onClick={this.onClickCart}>{<FiShoppingCart/>}</CartImage>
-            <Count display={this.display}>{noOfProductsInCart}</Count>
-            <CloseButton display={this.display} onClick={this.onClickCart}>X</CloseButton>
-            <CartPage display={this.display}>
+        <CartContainer display={this.display.toString()} >
+            <CartImage display={this.display.toString()} onClick={this.onClickCart}>{<FiShoppingCart/>}</CartImage>
+            <Count display={this.display.toString()}>{noOfProductsInCart}</Count>
+            <CloseButton display={this.display.toString()} onClick={this.onClickCart}>X</CloseButton>
+            <CartPage display={this.display.toString()}>
                 <SelectedProducts>
                     <InnerCartImage>{<FiShoppingCart/>}</InnerCartImage>
                     <CartHeading>Cart</CartHeading>

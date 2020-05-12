@@ -128,7 +128,7 @@ const LocationDisplay = withRouter(({ location }) => (
       const passwordField = getByPlaceholderText("Password");
       const signInButton = getByRole("button", { name: "Sign In" });
   
-      const mockSuccessPromise = new Promise(function(resolve, reject) {
+      const mockSuccessPromise =new Promise(function(resolve, reject) {
         resolve(getUserSignInResponse);
       });
       //const mockSuccessPromise =Promise.resolve(getUserSignInResponse);
@@ -138,7 +138,9 @@ const LocationDisplay = withRouter(({ location }) => (
       fireEvent.change(usernameField, { target: { value: username } });
       fireEvent.change(passwordField, { target: { value: password } });
       fireEvent.click(signInButton);
-      console.log("success",authStore.getUserSignInAPIStatus)
+      // await waitFor(()=>{
+      //   console.log("success",authStore.getUserSignInAPIStatus)
+      // })
       
   
       // await waitFor(() => {
@@ -151,35 +153,36 @@ const LocationDisplay = withRouter(({ location }) => (
       //   );
       // });
     });
+
+    it("should render signInRoute failure state", async() => {
+      const { getByText, getByPlaceholderText, getByRole } = render(
+        <Router history={createMemoryHistory()}>
+          <SignInRoute authStores={authStore} />
+        </Router>
+      );
   
-   it("should render signInRoute failure state",async () => {
-    const { getByText, getByPlaceholderText, getByRole, } = render(
-      <Router history={createMemoryHistory()}>
-        <SignInRoute authStores={authStore} />
-      </Router>
-    );
+      const username = "test-user";
+      const password = "test-password";
+  
+      const usernameField = getByPlaceholderText("Username");
+      const passwordField = getByPlaceholderText("Password");
+      const signInButton = getByRole("button", { name: "Sign In" });
+  
+      const mockFailurePromise = new Promise(function(resolve, reject) {
+        reject(new Error("error"));
+      })//.catch(() => {});
+      const mockSignInAPI = jest.fn();
+      mockSignInAPI.mockReturnValue(mockFailurePromise);
+      authAPI.signInAPI = mockSignInAPI;
+  
+      fireEvent.change(usernameField, { target: { value: username } });
+      fireEvent.change(passwordField, { target: { value: password } });
+      fireEvent.click(signInButton);
+  
+      await waitFor(() => {
+        getByText(/error/i);
+     });
+    });
+  });
 
-    const username = "test-user";
-    const password = "test-password";
-
-    const usernameField = getByPlaceholderText("Username");
-    const passwordField = getByPlaceholderText("Password");
-    const signInButton = getByRole("button", { name: "Sign In" });
-
-    const mockFailurePromise = new Promise(function(resolve, reject) {
-      reject(new Error("error"));
-    }).catch(() => {});
-    const mockSignInAPI = jest.fn();
-    mockSignInAPI.mockReturnValue(mockFailurePromise);
-    authAPI.signInAPI = mockSignInAPI;
-
-    fireEvent.change(usernameField, { target: { value: username } });
-    fireEvent.change(passwordField, { target: { value: password } });
-    fireEvent.click(signInButton);
-
-  //   // await waitFor(() => {
-  //   //   getByText(/server-error/i);
-  //   // });
-   });
-
-})
+// })

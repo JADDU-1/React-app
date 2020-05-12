@@ -76,6 +76,7 @@ import {
       price="Highest to lowest"
       productStore.onChangeSortBy(price)
       expect(productStore.sortedAndFilteredProducts).toStrictEqual([{price:3},{price:2},{price:1}]);
+      expect(productStore.totalNoOfProductsDisplayed).toBe(3);
      
     })
 
