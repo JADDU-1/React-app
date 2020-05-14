@@ -7,7 +7,7 @@ const Image=styled.img`${tw`h-auto w-full object-cover `}`;
 const AddButton=styled.button`${tw`bg-black text-white w-full flex-grow p-3 rounded `}`;
 const FreeShipping = styled.p `
   ${tw`
-       sticky  bg-black text-xs text-white  text-center
+       sticky  bg-black text-xs text-white  text-center absolute  ml-20 p-1
   `}
   width:${props=>props.isFreeShipping?'100px':'0px'}
 `;

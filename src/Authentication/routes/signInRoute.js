@@ -12,9 +12,17 @@ class SignInRoute extends React.Component {
   @observable password = "";
   @observable errorMessage = "";
 
+  signInFormRef=React.createRef()
+  // userNameRef=React.createRef()
+  // passwordRef=React.createRef()
+  componentDidMount(){
+      this.signInFormRef.current.userNameRef.current.focus()
+  }
+
   @action.bound
   onChangeUsername(e) {
     this.username = e.target.value;
+   // this.passwordRef.current.focus()
   }
 
   @action.bound
@@ -24,7 +32,7 @@ class SignInRoute extends React.Component {
 
   onSignInSuccess = () => {
     const { history } = this.props;
-    this.props.history.replace(PRODUCT_PATH);
+    history.replace(PRODUCT_PATH);
   };
 
   @action.bound
@@ -40,9 +48,11 @@ class SignInRoute extends React.Component {
     e.preventDefault();
     if (this.username === "" || this.username === undefined) {
       this.errorMessage = "Please enter username";
+      this.signInFormRef.current.userNameRef.current.focus()
       return;
     } else if (this.password === "" || this.password === undefined) {
       this.errorMessage = "Please enter password";
+      this.signInFormRef.current.passwordRef.current.focus()
       return;
     } else {
       this.errorMessage = "";
@@ -58,14 +68,18 @@ class SignInRoute extends React.Component {
   };
 
   render() {
+    console.log(this.signInFormRef)
     return (
       <SignInPage
+       ref={this.signInFormRef}
         errorMessage={this.errorMessage}
         username={this.username}
         password={this.password}
         onChangeUsername={this.onChangeUsername}
         onChangePassword={this.onChangePassword}
         onSubmitForm={this.onSubmitForm}
+        // userNameRef={this.userNameRef}
+        // passwordRef={this.passwordRef}
       />
     )
   }
