@@ -5,8 +5,9 @@ import { withKnobs } from '@storybook/addon-knobs'
 
 export default { title: 'Button', decorators: [withKnobs] }
 
-export const withText = () => <Button>Hello Button</Button>
-
+export const withText = () => (
+   <Button onClick={action('click')}>Hello Button</Button>
+)
 export const withEmoji = () => (
    <Button onClick={action('click')}>
       <span role='img' aria-label='so cool'>

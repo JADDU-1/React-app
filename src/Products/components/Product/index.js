@@ -1,18 +1,20 @@
 import React from 'react'
 import { observer, inject } from 'mobx-react'
 import { EachProduct, Image, AddButton, FreeShipping } from './styles.js'
-import { ToastContainer, toast } from 'react-toastify'
+import { toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
-// import Tostify from '../../Tostify'
+
+toast.configure({
+   autoClose: 2000,
+   draggable: true,
+   position: toast.POSITION.BOTTOM_CENTER
+})
 
 @inject('cartStore')
 @observer
 class Product extends React.Component {
-   notify = () => toast('Product added to your cart!')
-
    onClickAddToCart = event => {
-      //const {eachProduct}=this.props
-      this.notify()
+      toast.warn('Product Added To Cart')
       this.props.cartStore.onClickAddToCart(event.target.id)
    }
 
@@ -21,12 +23,12 @@ class Product extends React.Component {
       let installment = parseFloat(
          eachProduct.price / eachProduct.installmentsCount
       ).toFixed(2)
+
       return (
          <EachProduct>
             <FreeShipping isFreeShipping={eachProduct.isFreeShipping}>
                {eachProduct.isFreeShipping ? 'Free shipping' : ''}
             </FreeShipping>
-            <ToastContainer />
             <Image src={eachProduct.imageURL}></Image>
             <p>{eachProduct.title}</p>
             <p>
