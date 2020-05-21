@@ -1,39 +1,53 @@
 import React from 'react'
-import { observer,inject } from 'mobx-react'
-import {EachProduct,Image,AddButton,FreeShipping} from './styles.js'
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-// import Tostify from '../../Tostify'
+import { observer, inject } from 'mobx-react'
+import { EachProduct, Image, AddButton, FreeShipping } from './styles.js'
+import { toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
+
+toast.configure({
+   autoClose: 2000,
+   draggable: true,
+   position: toast.POSITION.BOTTOM_CENTER
+})
 
 @inject('cartStore')
-@observer 
+@observer
 class Product extends React.Component {
-  notify = () => toast("Product added to your cart!");
+   onClickAddToCart = event => {
+      toast.warn('Product Added To Cart')
+      this.props.cartStore.onClickAddToCart(event.target.id)
+   }
 
-  onClickAddToCart = (event) => {
-    //const {eachProduct}=this.props
-    this.notify()
-    this.props.cartStore.onClickAddToCart(event.target.id)
-  }
+   render() {
+      const { eachProduct } = this.props
+      let installment = parseFloat(
+         eachProduct.price / eachProduct.installmentsCount
+      ).toFixed(2)
 
-  render() {
-    const {eachProduct} = this.props;
-    let installment=parseFloat((eachProduct.price)/eachProduct.installmentsCount).toFixed(2)
-    return (
-        <EachProduct>
+      return (
+         <EachProduct>
             <FreeShipping isFreeShipping={eachProduct.isFreeShipping}>
-                {eachProduct.isFreeShipping ? 'Free shipping' : ''}
+               {eachProduct.isFreeShipping ? 'Free shipping' : ''}
             </FreeShipping>
-            <ToastContainer />
             <Image src={eachProduct.imageURL}></Image>
             <p>{eachProduct.title}</p>
-            <p>{eachProduct.currencyFormat}{eachProduct.price}</p>
-            <p>or {eachProduct.installmentsCount}x{eachProduct.currencyFormat}{installment}</p>
-            <AddButton id={eachProduct.productId} onClick={this.onClickAddToCart}>Add to cart</AddButton>
-        </EachProduct>
-    );
-  }
+            <p>
+               {eachProduct.currencyFormat}
+               {eachProduct.price}
+            </p>
+            <p>
+               or {eachProduct.installmentsCount}x{eachProduct.currencyFormat}
+               {installment}
+            </p>
+            <AddButton
+               id={eachProduct.productId}
+               onClick={this.onClickAddToCart}
+            >
+               Add to cart
+            </AddButton>
+         </EachProduct>
+      )
+   }
 }
 
-export default Product;
- 
+export default Product
