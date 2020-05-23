@@ -2,7 +2,24 @@ import React, { Component } from 'react'
 import { SignPage, ErrorMsg, Input, Button, Title, TotalPage } from './styles'
 import { observer } from 'mobx-react'
 import Loader from 'react-loader-spinner'
-//import { RiLoader4Line } from 'react-icons/ri'
+
+export const SignInButton = ({ onSubmitForm, loading }) => {
+   return (
+      <Button onClick={onSubmitForm}>
+         {loading ? (
+            <Loader
+               type='TailSpin'
+               color='#00BFFF'
+               height={25}
+               width={25}
+               timeout={50000}
+            />
+         ) : (
+            'Sign In'
+         )}
+      </Button>
+   )
+}
 
 @observer
 class SignInPage extends Component {
@@ -36,19 +53,7 @@ class SignInPage extends Component {
                   onChange={onChangePassword}
                   value={password}
                ></Input>
-               <Button onClick={onSubmitForm}>
-                  {loading ? (
-                     <Loader
-                        type='TailSpin'
-                        color='#00BFFF'
-                        height={25}
-                        width={25}
-                        timeout={50000}
-                     />
-                  ) : (
-                     'Sign In'
-                  )}
-               </Button>
+               <SignInButton {...{ onSubmitForm, loading }} />
                <ErrorMsg>{errorMessage}</ErrorMsg>
             </SignPage>
          </TotalPage>

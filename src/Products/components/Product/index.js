@@ -26,9 +26,13 @@ class Product extends React.Component {
 
       return (
          <EachProduct>
-            <FreeShipping isFreeShipping={eachProduct.isFreeShipping}>
-               {eachProduct.isFreeShipping ? 'Free shipping' : ''}
-            </FreeShipping>
+            {eachProduct.isFreeShipping ? (
+               <FreeShipping isFreeShipping={eachProduct.isFreeShipping}>
+                  Free shipping
+               </FreeShipping>
+            ) : (
+               ''
+            )}
             <Image src={eachProduct.imageURL}></Image>
             <p>{eachProduct.title}</p>
             <p>
